@@ -75,37 +75,24 @@
             Author and affiliation information will be added after the review-ready metadata is finalized.
           </p>
           <div class="button-row">
-            <a href="static/pdfs/paper.pdf" target="_blank" class="project-button">
+            <a href="static/pdfs/paper.pdf" target="_blank" class="project-button rounded-button">
               <i class="fas fa-file-pdf"></i>
               <span>Paper</span>
             </a>
-            <a href="static/pdfs/supplementary_material.pdf" target="_blank" class="project-button">
+            <a href="static/pdfs/supplementary_material.pdf" target="_blank" class="project-button rounded-button">
               <i class="fas fa-file-alt"></i>
               <span>Supplementary</span>
             </a>
-            <a href="https://github.com/smin0136/super-gaussian-project" target="_blank" class="project-button">
+            <a href="https://github.com/smin0136/super-gaussian-project" target="_blank" class="project-button rounded-button">
               <i class="fab fa-github"></i>
               <span>GitHub Repo</span>
             </a>
-            <a href="#results" class="project-button project-button-dark">
-              <i class="fas fa-flask"></i>
-              <span>Results</span>
+            <a href="#user-study" class="project-button rounded-button project-button-dark">
+              <i class="fas fa-users"></i>
+              <span>User Study</span>
             </a>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="page-section section-alt">
-      <div class="container is-max-desktop">
-        <h2 class="section-title">Teaser</h2>
-        <p class="section-intro">Pipeline overview of the VR client, Gaussian selection, semantic labeling, and NLI-driven editing loop.</p>
-        <figure class="paper-figure">
-          <img src="static/images/figures/teaser_pipeline.png" alt="Super-Gaussian teaser pipeline figure">
-          <figcaption>
-            The framework combines editable Gaussian models, immersive VR interaction, structure-aware ROI selection, scene understanding, semantic labeling, and user-defined label-based editing.
-          </figcaption>
-        </figure>
       </div>
     </section>
 
@@ -123,6 +110,19 @@
 
     <section class="page-section section-alt">
       <div class="container is-max-desktop">
+        <h2 class="section-title">Teaser</h2>
+        <p class="section-intro">Pipeline overview of the VR client, Gaussian selection, semantic labeling, and NLI-driven editing loop.</p>
+        <figure class="paper-figure white-figure">
+          <img src="static/images/figures/teaser_pipeline.png" alt="Super-Gaussian teaser pipeline figure">
+          <figcaption>
+            The framework combines editable Gaussian models, immersive VR interaction, structure-aware ROI selection, scene understanding, semantic labeling, and user-defined label-based editing.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container is-max-desktop">
         <h2 class="section-title">Abstract</h2>
         <div class="paper-body">
           <p>
@@ -138,24 +138,38 @@
       </div>
     </section>
 
-    <section class="page-section" id="overview">
+    <section class="page-section section-alt" id="overview">
       <div class="container is-max-desktop">
         <h2 class="section-title">Overview</h2>
-        <div class="paper-body">
-          <p>
-            Super-Gaussian extends editable Gaussian-based volume visualization to immersive VR by introducing structure-aware interaction units, a hierarchical select-and-refine workflow, and NLI-based scene understanding and editing. The project page below follows the paper structure more closely than the earlier summary layout.
-          </p>
-          <p>
-            The central idea is to move from point-wise Gaussian editing toward region-level interaction. The method groups Gaussian primitives into feature-aware clusters, supports random walk, cluster, and point selection modes, and lets users define, label, query, and manipulate regions of interest directly inside VR.
-          </p>
+        <p class="section-intro">The main technical ideas in the current submission.</p>
+        <div class="overview-grid">
+          <article class="overview-card">
+            <h3>Structure-aware ROI selection</h3>
+            <p>
+              Super-Gaussian groups Gaussian splats into higher-level interaction units and supports random walk, cluster, and point modes within one coarse-to-fine workflow.
+            </p>
+          </article>
+          <article class="overview-card">
+            <h3>NLI inside VR</h3>
+            <p>
+              Users can issue open-vocabulary commands to label, query, and edit selected regions while continuing direct spatial interaction with the volume in the headset.
+            </p>
+          </article>
+          <article class="overview-card">
+            <h3>Editable Gaussian rendering</h3>
+            <p>
+              The system extends editable Gaussian-based volume visualization to immersive VR with real-time control over color, opacity, lighting, and viewpoint.
+            </p>
+          </article>
         </div>
-
         <details class="paper-details">
           <summary>Extended Overview</summary>
           <div class="paper-body detail-block">
-            <h3>Key capabilities</h3>
             <p>
-              First, the framework supports structure-aware ROI selection without requiring pre-segmented object labels. Second, it integrates NLI into the immersive workflow so that region-specific commands can be issued while the user keeps interacting with the volume. Third, it maintains editable rendering, allowing color, opacity, and lighting modifications at interactive rates.
+              Super-Gaussian extends editable Gaussian-based volume visualization to immersive VR by introducing structure-aware interaction units, a hierarchical select-and-refine workflow, and NLI-based scene understanding and editing.
+            </p>
+            <p>
+              The central idea is to move from point-wise Gaussian editing toward region-level interaction. The method groups Gaussian primitives into feature-aware clusters, supports random walk, cluster, and point selection modes, and lets users define, label, query, and manipulate regions of interest directly inside VR.
             </p>
             <p>
               In the paper, these capabilities are framed as three complementary outcomes: spatially guided interpretation of volumetric structures, iterative perception through selection plus querying, and flexible communication or presentation workflows built on user-defined labels.
@@ -165,31 +179,27 @@
       </div>
     </section>
 
-    <section class="page-section section-alt" id="results">
+    <section class="page-section" id="case-study">
       <div class="container is-max-desktop">
-        <h2 class="section-title">Results</h2>
-        <p class="section-intro">This section follows the paper order: case studies first, then user studies, then post-interview and rendering notes.</p>
-
+        <h2 class="section-title">Case Study</h2>
+        <p class="section-intro">Representative scenarios spanning natural objects, medical data, simulation data, and anatomy-focused exploration.</p>
         <details class="paper-details">
-          <summary>Open full results and study details</summary>
+          <summary>Open full case study details</summary>
           <div class="detail-block">
-            <div class="paper-subsection first-subsection">
-              <h3>Case Studies</h3>
-            </div>
             <div class="paper-body">
               <p>
                 The paper presents four case studies to show how Super-Gaussian extends NLI-driven volume visualization toward richer exploratory analysis and presentation workflows. The authors highlight three main themes: spatially guided interpretation through partial Gaussian selection, iterative exploration through the combination of selection and language queries, and communication workflows based on interactive region specification.
               </p>
             </div>
 
-            <figure class="paper-figure">
+            <figure class="paper-figure white-figure">
               <img src="static/images/figures/temp_case.jpg" alt="Select-and-refine workflow case studies figure">
               <figcaption>
                 Select-and-refine workflow examples for bonsai, aneurysm, and Nyx. Brush modes and speech annotations show how spatial interaction and text labeling are combined.
               </figcaption>
             </figure>
 
-            <div class="paper-subsection">
+            <div class="paper-subsection first-subsection">
               <h3>5.1 Bonsai</h3>
               <div class="paper-body">
                 <p>
@@ -238,13 +248,13 @@
             </div>
 
             <div class="two-figures">
-              <figure class="paper-figure">
+              <figure class="paper-figure white-figure">
                 <img src="static/images/figures/temp_chameleon_one.png" alt="Chameleon case study figure">
                 <figcaption>
                   Chameleon case study: question answering on selected regions and guided-tour style explanation over user-defined labels.
                 </figcaption>
               </figure>
-              <figure class="paper-figure">
+              <figure class="paper-figure white-figure">
                 <img src="static/images/figures/temp_nyx.png" alt="Aneurysm and Nyx editing figure">
                 <figcaption>
                   Label-driven editing examples from the aneurysm and Nyx datasets.
@@ -252,16 +262,53 @@
               </figure>
             </div>
           </div>
-            <div class="paper-subsection">
-              <h3>User Studies</h3>
-            </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="page-section section-alt" id="user-study">
+      <div class="container is-max-desktop">
+        <h2 class="section-title">User Study</h2>
+        <p class="section-intro">Summary cards first, followed by the paper-ordered detailed study description.</p>
+
+        <div class="study-summary-grid">
+          <article class="study-summary-card">
+            <h3>Participants</h3>
+            <p>11 unpaid participants, aged 22 to 31, recruited from a local university.</p>
+            <p>1 left-handed participant, 3 participants wearing glasses, all with normal vision and no color perception difficulties.</p>
+          </article>
+          <article class="study-summary-card">
+            <h3>Experiment Setup</h3>
+            <p>Meta Quest 3 via wired Link to a PC-based VR setup.</p>
+            <p>2064 x 2208 per eye, 110 degree field of view, up to 120 Hz, on a Ryzen 9 9950X + 128 GB RAM + RTX 3090 desktop.</p>
+          </article>
+          <article class="study-summary-card">
+            <h3>Hypotheses</h3>
+            <p>H1: better accuracy, preference, and fatigue.</p>
+            <p>H2: lower workload via coarse-to-fine refinement. H3-H4: better understanding through NLI and VR exploration.</p>
+          </article>
+          <article class="study-summary-card">
+            <h3>Study 1</h3>
+            <p>Framework usability with chameleon, aneurysm, and Nyx after a 15 to 35 minute training session.</p>
+            <p>Mean scores above 6.0 across selection, exploration, spatial understanding, NLI, and overall experience.</p>
+          </article>
+          <article class="study-summary-card">
+            <h3>Study 2</h3>
+            <p>Selection comparison against SuperSplat and GSVR on vortex, lobster, and ionization.</p>
+            <p>Metrics include ACC, MCC, F1, IoU, precision, interaction count, completion time, and NASA-TLX workload.</p>
+          </article>
+        </div>
+
+        <details class="paper-details">
+          <summary>Open full user study details</summary>
+          <div class="detail-block">
             <div class="paper-body">
               <p>
                 Two separate user studies were conducted to evaluate both the performance of the selection method and the usability of the overall framework. Study 1 focused on overall usability in VR, while Study 2 focused on comparative selection performance against existing Gaussian-based methods.
               </p>
             </div>
 
-            <div class="paper-subsection">
+            <div class="paper-subsection first-subsection">
               <h3>Participants and Experiment Setup</h3>
               <div class="paper-body">
                 <p>
@@ -283,7 +330,7 @@
                   H1 states that the proposed selection approach should achieve higher accuracy, higher user preference, and lower interaction fatigue than 2D selection and manual point-based selection. H2 states that the hierarchical random-walk, cluster, and point-based workflow should reduce workload by allowing coarse boundary detection followed by fine-grained correction.
                 </p>
                 <p>
-                  H3 states that combining selection with text labeling and NLI-based perception should improve understanding of unknown structures and reduce the number of interactions required. H4 states that VR-based exploration should improve users’ ability to understand, select, and edit volumetric structures.
+                  H3 states that combining selection with text labeling and NLI-based perception should improve understanding of unknown structures and reduce the number of interactions required. H4 states that VR-based exploration should improve users' ability to understand, select, and edit volumetric structures.
                 </p>
               </div>
             </div>
@@ -311,7 +358,7 @@
                 </p>
               </div>
 
-              <figure class="paper-figure">
+              <figure class="paper-figure white-figure">
                 <img src="static/images/figures/usability-1.png" alt="Framework usability figure">
                 <figcaption>
                   Study 1 mean scores across five categories: selection, exploration, spatial understanding, NLI, and overall experience.
@@ -353,7 +400,7 @@
                 </p>
               </div>
 
-              <figure class="paper-figure">
+              <figure class="paper-figure white-figure">
                 <img src="static/images/figures/userstudy_selection_final_green.png" alt="Selection study datasets">
                 <figcaption>
                   Study 2 benchmark datasets: vortex, lobster, and ionization.
@@ -396,7 +443,7 @@
                 </table>
               </div>
 
-              <figure class="paper-figure">
+              <figure class="paper-figure white-figure">
                 <img src="static/images/figures/nasa-tlx.png" alt="NASA-TLX results">
                 <figcaption>
                   NASA-TLX style workload summary. Super-Gaussian achieves the highest perceived performance and markedly lower mental, temporal, effort, and frustration scores.

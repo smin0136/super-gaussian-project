@@ -112,6 +112,10 @@ img {
   transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
 }
 
+.rounded-button {
+  border-radius: 999px;
+}
+
 .project-button:hover {
   background: var(--accent-soft);
   transform: translateY(-1px);
@@ -138,6 +142,42 @@ img {
 .section-intro {
   margin: 0 0 1.4rem;
   color: var(--muted);
+}
+
+.overview-grid,
+.study-summary-grid {
+  display: grid;
+  gap: 1.1rem;
+  margin: 0 0 1.4rem;
+}
+
+.overview-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.study-summary-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.overview-card,
+.study-summary-card {
+  padding: 1.15rem 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: #fff;
+}
+
+.overview-card h3,
+.study-summary-card h3 {
+  margin: 0 0 0.45rem;
+  font-family: "Sora", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.overview-card p,
+.study-summary-card p {
+  margin: 0 0 0.55rem;
 }
 
 .paper-body {
@@ -182,6 +222,16 @@ img {
   width: 100%;
   border: 1px solid var(--line);
   background: #fff;
+}
+
+.white-figure {
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+
+.white-figure img {
+  border: 1px solid var(--line);
 }
 
 .paper-figure figcaption {
@@ -313,6 +363,11 @@ img {
 
 @media screen and (max-width: 900px) {
   .two-figures {
+    grid-template-columns: 1fr;
+  }
+
+  .overview-grid,
+  .study-summary-grid {
     grid-template-columns: 1fr;
   }
 }
