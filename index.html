@@ -87,7 +87,11 @@
               <i class="fab fa-github"></i>
               <span>GitHub Repo</span>
             </a>
-            <a href="#user-study" class="project-button rounded-button project-button-dark">
+            <a href="#case-study" class="project-button rounded-button">
+              <i class="fas fa-search"></i>
+              <span>Case Study</span>
+            </a>
+            <a href="#user-study" class="project-button rounded-button">
               <i class="fas fa-users"></i>
               <span>User Study</span>
             </a>
@@ -110,19 +114,6 @@
 
     <section class="page-section section-alt">
       <div class="container is-max-desktop">
-        <h2 class="section-title">Teaser</h2>
-        <p class="section-intro">Pipeline overview of the VR client, Gaussian selection, semantic labeling, and NLI-driven editing loop.</p>
-        <figure class="paper-figure white-figure">
-          <img src="static/images/figures/teaser_pipeline.png" alt="Super-Gaussian teaser pipeline figure">
-          <figcaption>
-            The framework combines editable Gaussian models, immersive VR interaction, structure-aware ROI selection, scene understanding, semantic labeling, and user-defined label-based editing.
-          </figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section class="page-section">
-      <div class="container is-max-desktop">
         <h2 class="section-title">Abstract</h2>
         <div class="paper-body">
           <p>
@@ -138,7 +129,7 @@
       </div>
     </section>
 
-    <section class="page-section section-alt" id="overview">
+    <section class="page-section" id="overview">
       <div class="container is-max-desktop">
         <h2 class="section-title">Overview</h2>
         <p class="section-intro">The main technical ideas in the current submission.</p>
@@ -162,6 +153,14 @@
             </p>
           </article>
         </div>
+
+        <figure class="paper-figure white-figure">
+          <img src="static/images/figures/teaser_pipeline.png" alt="Super-Gaussian teaser pipeline figure">
+          <figcaption>
+            The framework combines editable Gaussian models, immersive VR interaction, structure-aware Gaussian selection, scene understanding, semantic labeling, and user-defined label-based editing.
+          </figcaption>
+        </figure>
+
         <details class="paper-details">
           <summary>Extended Overview</summary>
           <div class="paper-body detail-block">
@@ -179,10 +178,11 @@
       </div>
     </section>
 
-    <section class="page-section" id="case-study">
+    <section class="page-section section-alt" id="case-study">
       <div class="container is-max-desktop">
         <h2 class="section-title">Case Study</h2>
         <p class="section-intro">Representative scenarios spanning natural objects, medical data, simulation data, and anatomy-focused exploration.</p>
+
         <details class="paper-details">
           <summary>Open full case study details</summary>
           <div class="detail-block">
@@ -200,49 +200,61 @@
             </figure>
 
             <div class="paper-subsection first-subsection">
-              <h3>5.1 Bonsai</h3>
+              <h3>Bonsai</h3>
               <div class="paper-body">
                 <p>
-                  The bonsai dataset is used to demonstrate the usefulness of the select-and-refine workflow when semantically different structures share similar intensity values and cannot be separated cleanly by a simple transfer function. Starting from two base transfer-function models, the user progressively refines the visualization by separating the pot, gravel, branches, leaves, grass, and surrounding structures.
+                  We evaluate the usefulness of the select-and-refine workflow of our framework using the bonsai dataset. This dataset is known to be difficult to separate using a simple 1D TF, because semantically different structures often share similar intensity values and are therefore mapped to the same visual appearance. Through our VR-based selection, users can intuitively separate regions with similar visual or semantic characteristics and assign different colors to them.
                 </p>
                 <p>
-                  Random walk is first used to separate the pot region from the surrounding structure using only rough foreground and background brush strokes. The paper stresses that these strokes do not need to be precise seeds. After the initial separation, the user performs additional manual refinement to isolate irregular boundaries more accurately. Leaves and grass, which may be similar in value but separated in space, can then be selected and recolored in a step-by-step workflow.
+                  Starting from base models trained with two TFs, we demonstrate how users can progressively refine the visualization by separating and coloring structures such as grass, branches, leaves, and rocks. We first separate the pot region from the surrounding structures using RW selection. To initialize RW, users roughly indicate foreground and background regions using a circular brush. The brush strokes do not need to provide precise seeds; instead, they only need to roughly indicate the ROIs, which is sufficient for RW to separate the pot from the remaining structures.
+                </p>
+                <p>
+                  After this coarse separation, users further refine the selection. In the pot and gravel regions, which have irregular and detailed boundaries, users perform additional manual selection to isolate the necessary areas more precisely. Finally, structures such as leaves and grass, which share similar intensity values, are separated based on spatial distance.
                 </p>
               </div>
             </div>
 
             <div class="paper-subsection">
-              <h3>5.2 Aneurysm</h3>
+              <h3>Aneurysm</h3>
               <div class="paper-body">
                 <p>
-                  The aneurysm example shows how VR-based selection and label-driven editing can support analysis of clinically meaningful vascular structures. The user decomposes the volume into the aneurysm sac, the parent vessel, and the aneurysm neck, then assigns labels to those connected structures while rotating and navigating the volume.
+                  Medical datasets such as the aneurysm dataset can benefit from VR-based selection and interactive text labeling. This dataset captures vascular structures with an aneurysm, where identifying clinically relevant regions is important for analysis and surgical planning.
                 </p>
                 <p>
-                  The paper identifies the aneurysm neck as especially important because it is the surgical target during clipping. Once those components are labeled, the user can issue natural language commands that jointly manipulate all aneurysm-related regions, such as reducing their opacity to simulate clipping or removal and reveal the remaining vessel structures more clearly.
+                  We first use selection to identify the aneurysm and decompose it into three clinically meaningful components: the aneurysm sac, the parent vessel, and the aneurysm neck. While navigating the volume and rotating the view, users interactively select the connected vascular structures and assign corresponding labels.
+                </p>
+                <p>
+                  In particular, the neck region, which connects the sac to the parent vessel, is of special interest because it is typically the target for surgical clipping. Through natural language instructions, users can simultaneously manipulate all selected units associated with this label, simulating a surgical planning scenario. For instance, users can reduce the opacity of the aneurysm-related area to simulate clipping or removal, enabling clearer visualization of the remaining vessel structures.
                 </p>
               </div>
             </div>
 
             <div class="paper-subsection">
-              <h3>5.3 Nyx</h3>
+              <h3>Nyx</h3>
               <div class="paper-body">
                 <p>
-                  In the Nyx dataset, the framework is used to interpret a complex cosmological structure through step-by-step classification and labeling. The user separates a dense central core, elongated filament-like branches, and smaller isolated fragments distributed around the structure.
+                  For the Nyx dataset, we demonstrate how users can explore and interpret complex cosmological structures through a step-by-step classification and labeling process. We first classify visible structures based on their geometric characteristics, separating a dense central core, elongated filament-like branches extending from the core, and smaller isolated fragments distributed around the structure.
                 </p>
                 <p>
-                  The paper uses this case to argue that the method is useful even when there are no clear semantic boundaries or predefined labels. Spatially disconnected but conceptually related regions can be grouped under a single label, after which NLI can be used to filter or manipulate them as one category.
+                  We then assign semantic labels to these regions, identifying them as the core, filaments, and isolated structures. This process reveals meaningful components of the cosmic web that are otherwise difficult to distinguish in semi-transparent volume renderings.
+                </p>
+                <p>
+                  Importantly, this example illustrates that our approach enables users to progressively interpret datasets without clear boundaries or predefined labels through interactive classification and annotation. Even spatially disconnected or visually ambiguous regions can be grouped under a single semantic label. Using NLI, users can then easily filter and manipulate these grouped regions, enabling efficient editing of complex simulation data.
                 </p>
               </div>
             </div>
 
             <div class="paper-subsection">
-              <h3>5.4 Chameleon</h3>
+              <h3>Chameleon</h3>
               <div class="paper-body">
                 <p>
-                  The chameleon example emphasizes perception-guided interpretation. A user may highlight a selected bone region, ask whether the green region is the shoulder girdle or the clavicle, and receive a response grounded in the current VR view captured by the system.
+                  Our framework also enables anatomically meaningful labeling and supports more fine-grained analysis compared to conventional labeling approaches. Through a perception loop, users can interactively explore segmented regions and interpret their semantic meaning.
                 </p>
                 <p>
-                  The paper gives examples such as identifying the pectoral girdle or vertebral column from selected colored regions. It also describes a guided-tour interaction in which the user asks the system to explain the segmented parts iteratively across the dataset.
+                  For example, a user may select a specific bone region of the chameleon and change its color to highlight the selected part. The user can then ask a question such as "Is the green part a shoulder girdle or a clavicle of a chameleon?" The system captures the current VR view, converts it to an image, and sends it along with the query to the LLM.
+                </p>
+                <p>
+                  Based on the visual context and the user query, the model can describe the selected region. Users can query other selected regions in the same way and can also review the overall segmentation results by issuing instructions such as "Give me a guided tour," enabling the system to summarize and explain the segmented structures across the dataset.
                 </p>
               </div>
             </div>
@@ -266,10 +278,10 @@
       </div>
     </section>
 
-    <section class="page-section section-alt" id="user-study">
+    <section class="page-section" id="user-study">
       <div class="container is-max-desktop">
         <h2 class="section-title">User Study</h2>
-        <p class="section-intro">Summary cards first, followed by the paper-ordered detailed study description.</p>
+        <p class="section-intro">Summary cards first, followed by the full study description with the detailed appendix discussion and per-participant tables.</p>
 
         <div class="study-summary-grid">
           <article class="study-summary-card">
@@ -284,13 +296,15 @@
           </article>
           <article class="study-summary-card">
             <h3>Hypotheses</h3>
-            <p>H1: better accuracy, preference, and fatigue.</p>
-            <p>H2: lower workload via coarse-to-fine refinement. H3-H4: better understanding through NLI and VR exploration.</p>
+            <p><strong>H1.</strong> Higher accuracy, higher user preference, and lower interaction fatigue than 2D selection and manual point-based selection.</p>
+            <p><strong>H2.</strong> Lower workload through a hierarchical RW-cluster-point select-and-refine workflow.</p>
+            <p><strong>H3.</strong> Better understanding of unknown structures through selection, text labeling, and NLI-based perception.</p>
+            <p><strong>H4.</strong> Better understanding, selection, and editing through VR-based exploration.</p>
           </article>
           <article class="study-summary-card">
             <h3>Study 1</h3>
             <p>Framework usability with chameleon, aneurysm, and Nyx after a 15 to 35 minute training session.</p>
-            <p>Mean scores above 6.0 across selection, exploration, spatial understanding, NLI, and overall experience.</p>
+            <p>Mean Likert scores: 6.20 for selection, 6.44 for exploration, 6.60 for spatial understanding, 6.03 for NLI, and 6.60 overall.</p>
           </article>
           <article class="study-summary-card">
             <h3>Study 2</h3>
@@ -304,7 +318,7 @@
           <div class="detail-block">
             <div class="paper-body">
               <p>
-                Two separate user studies were conducted to evaluate both the performance of the selection method and the usability of the overall framework. Study 1 focused on overall usability in VR, while Study 2 focused on comparative selection performance against existing Gaussian-based methods.
+                We conducted two separate user studies to evaluate both the performance of our selection method and the usability of our overall framework. In Study 1, participants explored various volumetric datasets using our framework. They experienced VR-based interaction, including controller-based volume editing, NLI, text labeling, and selection-driven NLI queries. We then evaluated the system's usability. In Study 2, we focused on the effectiveness of the selection method by comparing it with existing Gaussian-based selection techniques. We measured participants' selection accuracy, interaction count, completion time, and mental workload. After both studies, we additionally conducted post-interviews to gather qualitative feedback.
               </p>
             </div>
 
@@ -312,13 +326,13 @@
               <h3>Participants and Experiment Setup</h3>
               <div class="paper-body">
                 <p>
-                  The study recruited 11 unpaid participants aged 22 to 31 from a local university. One participant was left-handed and three wore glasses. All reported normal vision and no difficulties with color perception.
+                  We recruited 11 unpaid participants aged 22 to 31 from a local university. One participant was left-handed and three wore glasses. All participants reported normal vision and no difficulties with color perception.
                 </p>
                 <p>
-                  Prior experience was mixed: three participants had no prior VolVis experience, five had experience with DVR tools, and three had prior research experience in volume visualization. For VR, seven had no prior experience, one had limited experience, and three were familiar with VR interaction.
+                  Regarding prior experience with volume visualization, three participants had none, five had experience with DVR tools, and three had prior research experience in volume visualization. Regarding VR experience, seven participants had no prior experience, one had limited experience, and three were familiar with VR interaction.
                 </p>
                 <p>
-                  The setup used a Meta Quest 3 headset connected via wired Link to a PC-based VR system with 2064 x 2208 resolution per eye, 110 degree field of view, and up to 120 Hz refresh rate. The desktop machine used an AMD Ryzen 9 9950X CPU, 128 GB RAM, and an NVIDIA GeForce RTX 3090 GPU.
+                  We used a Meta Quest 3 headset connected via a wired Link to a PC-based VR setup with 2064 x 2208 resolution per eye, 110 degree field of view, and up to 120 Hz refresh rate. The study was conducted on a desktop PC equipped with an AMD Ryzen 9 9950X 16-Core Processor, 128 GB of RAM, and an NVIDIA GeForce RTX 3090 GPU.
                 </p>
               </div>
             </div>
@@ -327,34 +341,43 @@
               <h3>Hypotheses</h3>
               <div class="paper-body">
                 <p>
-                  H1 states that the proposed selection approach should achieve higher accuracy, higher user preference, and lower interaction fatigue than 2D selection and manual point-based selection. H2 states that the hierarchical random-walk, cluster, and point-based workflow should reduce workload by allowing coarse boundary detection followed by fine-grained correction.
+                  <strong>H1.</strong> Our selection approach will achieve higher accuracy, higher user preference, and lower interaction fatigue compared to 2D selection and manual point-based selection.
                 </p>
                 <p>
-                  H3 states that combining selection with text labeling and NLI-based perception should improve understanding of unknown structures and reduce the number of interactions required. H4 states that VR-based exploration should improve users' ability to understand, select, and edit volumetric structures.
+                  <strong>H2.</strong> The hierarchical RW-cluster-point-based select-and-refine workflow will reduce user workload by enabling coarse boundary detection followed by fine-grained selection.
+                </p>
+                <p>
+                  <strong>H3.</strong> Combining selection with text labeling and NLI-based perception will help users better understand unknown structures in the dataset and reduce the number of interactions required.
+                </p>
+                <p>
+                  <strong>H4.</strong> VR-based exploration will improve users' ability to understand, select, and edit volumetric structures.
                 </p>
               </div>
             </div>
 
             <div class="paper-subsection">
-              <h3>6.1 Study 1: Framework Usability</h3>
+              <h3>Study 1: Framework Usability</h3>
               <div class="paper-body">
                 <h4>Datasets</h4>
                 <p>
-                  Study 1 used three datasets: chameleon as a biological dataset, aneurysm as a medical dataset, and Nyx as a simulation dataset.
+                  To evaluate the usability of our framework for volume exploration and volume visualization, we selected three datasets: chameleon as a biological dataset, aneurysm as a medical dataset, and Nyx as a simulation dataset.
                 </p>
                 <h4>Task and Procedure</h4>
                 <p>
-                  A training session introduced participants to basic VR interaction, including volume rotation, translation, scaling, brush interaction, text labeling, and NLI. The training used the bonsai dataset and lasted approximately 15 to 35 minutes depending on prior VR experience.
+                  Participants had diverse levels of prior experience with VR and volume visualization. Therefore, a training session was provided to familiarize them with the system, including basic VR interaction such as rotation, translation, and scaling of the volume, brush interaction, text labeling, and NLI. The training was conducted using the bonsai dataset and continued until participants felt confident to proceed without assistance. The duration of the training varied depending on prior VR experience, ranging from approximately 15 to 35 minutes.
                 </p>
                 <p>
-                  After training, participants performed tasks spanning several interaction scenarios: precise region selection and editing of vascular structures, semantic understanding and open-ended segmentation of anatomical models, and exploratory analysis of abstract volumetric data through semantic querying, visual adjustment, and refinement.
+                  After the training phase, participants performed the tasks on three datasets while wearing the VR headset. These tasks covered a range of interaction scenarios across datasets, including precise region selection and editing of vascular structures, semantic understanding and open-ended segmentation of anatomical models, and exploratory analysis in abstract volumetric data through semantic querying, visual adjustment, and refinement of meaningful regions.
                 </p>
                 <h4>Survey Responses</h4>
                 <p>
-                  Usability was evaluated with a Likert-scale questionnaire covering selection usability, exploration support, spatial understanding, NLI interaction, and overall experience. The reported mean scores were 6.20, 6.44, 6.60, 6.03, and 6.60, respectively, on a 7-point scale.
+                  We evaluated the usability of our framework using a Likert-scale questionnaire across five categories: selection usability, exploration support, spatial understanding, NLI interaction, and overall experience. Overall, participants reported consistently high scores across all categories, with mean ratings above 6.0 on a 7-point scale.
                 </p>
                 <p>
-                  The paper reports that participants found the selection interaction intuitive and accurate, rated the hierarchical select-and-refine workflow positively, and reported effective exploration and improved perception of 3D structure relative to 2D interfaces.
+                  Participants found the selection interaction intuitive and accurate, with a high usability score of 6.20. The hierarchical select-and-refine workflow was also rated positively, improving selection results and supporting error correction. Exploration and spatial understanding received very high scores of 6.44 and 6.60, with users reporting effective dataset exploration and better perception of 3D structures compared to 2D interfaces. NLI was rated slightly lower but still positively at 6.03, with users finding it helpful, especially when combined with selection. Participants with prior VolVis or VR experience (P3, P5, P8, P9, P11) engaged more actively and reported higher satisfaction.
+                </p>
+                <p>
+                  For overall experience, the system received a high rating of 6.60, indicating it was enjoyable and useful for volumetric data exploration, particularly among users with visualization experience. In summary, the results show that the framework enables intuitive interaction, effective selection and refinement, and improved understanding of volumetric data. These findings support H3 and H4.
                 </p>
               </div>
 
@@ -364,39 +387,38 @@
                   Study 1 mean scores across five categories: selection, exploration, spatial understanding, NLI, and overall experience.
                 </figcaption>
               </figure>
-
-              <details class="paper-details nested-details">
-                <summary>Open detailed usability notes</summary>
-                <div class="detail-block">
-                  <div class="paper-body">
-                    <p>
-                      The paper states that participants with prior VolVis or VR experience, identified as P3, P5, P8, P9, and P11, engaged more actively and reported higher satisfaction. It also highlights that exploration and spatial understanding received especially strong responses, which the authors treat as supporting H3 and H4.
-                    </p>
-                    <p>
-                      The appendix-backed discussion also sharpens the interpretation of these scores. Participants with prior VolVis or VR experience, especially P3, P5, P8, P9, and P11, engaged more actively and reported higher satisfaction. The paper's usability discussion characterizes the framework as enjoyable and useful for volumetric exploration, with the selection workflow supporting both intuitive interaction and effective refinement.
-                    </p>
-                  </div>
-                </div>
-              </details>
             </div>
 
             <div class="paper-subsection">
-              <h3>6.2 Study 2: Interactive Selection</h3>
+              <h3>Study 2: Interactive Selection</h3>
               <div class="paper-body">
                 <h4>Datasets</h4>
                 <p>
-                  Study 2 used vortex, lobster, and ionization. The vortex dataset was chosen for transparent volumes with clear density separation, lobster for thin articulated structures, and ionization for sparse regions with empty space.
+                  To evaluate selection accuracy, interaction count, completion time, and user workload, we selected three datasets. The vortex dataset features a transparent outer structure surrounding a dense inner core, the lobster dataset includes surface-connected regions with thin leg structures, and the ionization dataset contains a large, sparse target region with empty spaces.
                 </p>
                 <h4>Task and Procedure</h4>
                 <p>
-                  Participants were instructed to select the predefined target region, highlighted in red, after first exploring the volume to locate it. Three methods were compared: SuperSplat as a 2D screen-space baseline, GSVR as a manual point-based VR baseline, and Super-Gaussian as the proposed method. The method order was randomized, and participants practiced each method using the beetle dataset before the main tasks.
+                  Before the study, participants were introduced to the target selection task and instructed to select the regions highlighted in red. We compared three selection methods: a 2D screen-space method (SuperSplat), a manual point-based VR method (GSVR), and our Super-Gaussian. To ensure fairness, participants performed the selection tasks using all three methods in a randomized order.
                 </p>
                 <p>
-                  In VR conditions, both GSVR and Super-Gaussian used controller-based rotation, translation, and scaling. In SuperSplat, participants used mouse-and-keyboard controls, including modifier-based refinement shortcuts.
+                  Before the main tasks, participants completed a training session using the beetle dataset. They were allowed to practice each method until they felt confident in using the interaction techniques. For each dataset, participants first explored the volume to locate the target region. Selection began only after they had identified the target region.
+                </p>
+                <p>
+                  In the VR conditions, both GSVR and Super-Gaussian used controller-based interactions for volume manipulation, including rotation, translation, and scaling. In SuperSplat, participants used a mouse and keyboard to rotate, translate, and scale. Shortcut keys such as Ctrl+Z and WASD navigation were enabled, and selection refinement was supported using modifier keys. Participants were allowed to refine their selections until they were satisfied and then confirmed the selection by pressing the Complete button.
                 </p>
                 <h4>Metrics</h4>
                 <p>
-                  Accuracy was measured using ACC, MCC, F1, IoU, and precision. The paper explicitly motivates MCC because selection targets occupy only a small fraction of the data, making class imbalance a concern. Interaction effort was measured with interaction count and completion time, and workload was assessed using NASA-TLX.
+                  To assess selection performance, we report ACC, MCC, F1, IoU, and precision. MCC is especially important because the target region occupies only a small portion of the data, making class imbalance a concern. To evaluate user effort, we measured interaction count and completion time, and to evaluate workload and fatigue, participants completed NASA-TLX and post-questionnaires after the trials.
+                </p>
+                <h4>Results</h4>
+                <p>
+                  The results show that Super-Gaussian consistently outperforms baseline methods in both user experience and task performance. The NASA-TLX evaluation indicates that Super-Gaussian significantly reduces user workload, with substantially lower mental demand, temporal demand, effort, and frustration, while also achieving the highest perceived performance score.
+                </p>
+                <p>
+                  Table 1 demonstrates that Super-Gaussian achieves the highest overall accuracy across datasets, though performance varies depending on dataset characteristics. For datasets with clearly defined boundaries such as vortex and ionization, SuperSplat and GSVR can sometimes achieve comparable or slightly higher accuracy in specific conditions. In contrast, for more complex datasets such as lobster, VR-based methods outperform 2D approaches, highlighting their advantage in selecting thin structures and handling subtle spatial boundaries.
+                </p>
+                <p>
+                  The efficiency metrics further show that Super-Gaussian consistently requires fewer interactions and shorter completion times across all datasets, with especially large improvements in vortex and ionization. Additionally, the average brush-points-per-stroke measurement shows that interaction duration can differ substantially even when interaction counts appear similar, indicating that fatigue is more strongly influenced by sustained interaction than by count alone. These findings support H1 and H2.
                 </p>
               </div>
 
@@ -406,13 +428,6 @@
                   Study 2 benchmark datasets: vortex, lobster, and ionization.
                 </figcaption>
               </figure>
-
-              <div class="paper-body">
-                <h4>Selection Performance</h4>
-                <p>
-                  Super-Gaussian achieved the strongest overall balance of accuracy, efficiency, and workload reduction. The paper notes that for clearly bounded targets such as vortex and ionization, baselines can sometimes appear competitive in specific metrics, but the proposed method remains consistently strong across the full evaluation, especially when considering interaction effort and workload alongside accuracy.
-                </p>
-              </div>
 
               <div class="paper-table">
                 <table>
@@ -443,67 +458,83 @@
                 </table>
               </div>
 
+              <div class="paper-table">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Dataset</th>
+                      <th>GSVR Avg Pts/St</th>
+                      <th>Super-Gaussian Avg Pts/St</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>vortex</td><td>64.31</td><td>56.83</td></tr>
+                    <tr><td>lobster</td><td>48.27</td><td>39.54</td></tr>
+                    <tr><td>ionization</td><td>364.88</td><td>156.24</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
               <figure class="paper-figure white-figure">
                 <img src="static/images/figures/nasa-tlx.png" alt="NASA-TLX results">
                 <figcaption>
                   NASA-TLX style workload summary. Super-Gaussian achieves the highest perceived performance and markedly lower mental, temporal, effort, and frustration scores.
                 </figcaption>
               </figure>
-
-              <details class="paper-details nested-details">
-                <summary>Open detailed metric and workload notes</summary>
-                <div class="detail-block">
-                  <div class="paper-body">
-                    <p>
-                      The paper interprets interaction count and completion time together because different interfaces produce different action granularities. In VR, a single brush stroke can vary substantially in duration, so count alone does not fully capture physical effort. This is one reason the authors also emphasize workload results and qualitative feedback.
-                    </p>
-                    <p>
-                      The reported workload plot shows Super-Gaussian with the strongest perceived performance score at 6.60 and substantially lower mental demand, temporal demand, effort, and frustration than the baseline methods. The authors use these findings as support for H1 and H2.
-                    </p>
-                  </div>
-                </div>
-              </details>
             </div>
 
             <div class="paper-subsection">
-              <h3>6.3 Post-Interview Summary</h3>
+              <h3>Post-Interview Summary</h3>
               <div class="paper-body">
                 <p>
-                  Participants naturally adopted a coarse-to-fine strategy, beginning with broad region selection through random walk or cluster modes and then refining with point-based interaction. Selection behavior also adapted to dataset characteristics, with simple or well-separated regions often handled through coarse methods and denser structures requiring cluster and point refinement together.
-                </p>
-                <p>
-                  The post-interview analysis also reinforces the value of VR for depth perception, spatial understanding, and direct manipulation of 3D data. NLI was generally seen as beneficial for understanding unfamiliar structures, though the paper notes that latency, readability, undo support, and clearer visual feedback remain areas for improvement.
+                  Participants' feedback shows that users naturally adopted a coarse-to-fine selection strategy, starting with broad region selection (RW or cluster modes) and refining with point-based interaction. This confirms that the hierarchical workflow improves efficiency while preserving precision (H2). Selection behavior was adaptive to dataset characteristics: simple or well-separated regions were handled with coarse methods, while complex or dense structures required combinations of cluster and point refinement. This demonstrates the system's flexibility in handling varying data complexity. Compared with traditional point-based tools, participants consistently reported greater efficiency and reduced physical effort, supporting H1. The multi-method approach reduced repetitive manual interaction and improved task speed. Users also highlighted clear advantages of VR over 2D interaction (H4), particularly for spatial understanding, depth perception, and ease of manipulating 3D data. However, users with strong 2D tool experience sometimes still preferred familiar workflows. The integration of NLI was generally seen as beneficial (H3), helping users interpret and query data intuitively, though improvements in latency and readability are needed. Participants suggested several usability improvements, including better visual feedback for tools, undo functionality, and more intuitive controller mappings. Finally, the framework was considered especially effective for complex, unfamiliar, or overlapping datasets, with potential applications in domains like medical imaging and SciVis.
                 </p>
               </div>
 
               <details class="paper-details nested-details">
-                <summary>Open extended post-interview notes</summary>
+                <summary>Open extended discussion and per-participant tables</summary>
                 <div class="detail-block">
                   <div class="paper-body">
                     <p>
-                      The paper reports that participants consistently described the multi-method workflow as more efficient and less physically demanding than traditional point-wise editing. It also notes an important nuance: users with strong 2D tool experience sometimes still preferred familiar desktop workflows, even while acknowledging the spatial benefits of VR.
+                      The post-interview responses provide additional insights into how participants perceived the selection workflow and interaction design. A consistent pattern was the use of a coarse-to-fine strategy, in which broad regions were first selected using RW or cluster mode and then refined using point mode selection (P2, P4, P7, P9, P10, P11). This behavior aligns with H2, suggesting that the hierarchical select-and-refine workflow effectively reduces the need for exhaustive point-based interaction while maintaining flexibility for fine-grained editing. This pattern was also explicitly described by participants. For instance, P9 noted that they often used "RW" to first select a large region and then "cluster" for refinement, while P8 described a structured workflow where "RW -> cluster -> point" was used to progressively refine the selection and balance efficiency and accuracy.
                     </p>
                     <p>
-                      Appendix H adds more concrete participant-level evidence. P9 reported often using "RW" first and then "cluster" for refinement, while P8 described a structured "RW -> cluster -> point" workflow for balancing efficiency and accuracy. P8 also emphasized that the difference in task speed and fatigue was noticeable, and P10 noted that cluster-based interaction made it easier to select reasonably adjacent regions efficiently.
+                      Participants also emphasized that the choice of selection method strongly depended on dataset characteristics (P1, P2, P4, P7, P8, P9). Broad, clearly separated regions were typically handled using RW mode, whereas dense or structurally complex regions required cluster or point-based refinement. As P4 described, simple regions could be handled with point-based interaction alone. In contrast, more complex structures required combinations such as cluster plus point or RW plus point for efficient selection. Similarly, P8 reported that visually distinct regions were efficiently handled with RW selection alone, whereas regions with similar features required cluster-based selection followed by point-level refinement. These observations indicate that the framework supports adaptive interaction strategies that respond to structural complexity, separation, and feature similarity.
                     </p>
                     <p>
-                      The appendix further reinforces the VR advantage claims. P5 noted that in 2D interaction they had to actively move and adjust the volume to understand structure, whereas in VR simply changing the viewing angle was often enough. P9 similarly observed that locating the desired region in the vortex dataset was easier in VR than in 2D, and participants suggested practical improvements such as better visual feedback, undo functionality, and more intuitive controller mappings.
+                      Compared with traditional point-based selection approaches, participants consistently reported improved efficiency and reduced effort (P1, P4, P7, P8, P9, P10), supporting H1. Several participants noted that GSVR was time-consuming and physically demanding, while Super-Gaussian enabled faster selection through a combination of methods. In particular, P8 emphasized that "the difference in task speed and fatigue was noticeable," and P10 noted that cluster-based interaction allows users to "select reasonably adjacent regions" efficiently. These responses highlight that the method's benefit lies not only in accuracy but also in reducing repetitive manual interaction.
+                    </p>
+                    <p>
+                      Participants also reported clear advantages of VR-based interaction over 2D approaches, particularly in terms of spatial understanding and interaction efficiency (P4, P5, P7, P8, P9, P10), supporting H4. VR allowed users to directly access and manipulate volumetric structures in 3D, reducing ambiguity caused by overlap and improving depth perception. For example, P5 noted that "In 2D-based interaction, I had to actively move and adjust the volume to understand its structure, while in VR, simply changing the viewing angle was enough to grasp it. Moreover, controlling the volume using only a mouse required a high level of concentration." Similarly, P9 observed that "in the vortex dataset, it was much easier to find the desired region in VR than in 2D," and that viewpoint control was significantly more flexible. P8 further emphasized that rotation, translation, and scaling in VR made it easier to understand spatial structures and perform analysis. However, users with strong prior experience in 2D image editing tools tended to remain comfortable with 2D-based workflows in certain scenarios (P3, P6), suggesting that familiarity can influence interaction preference.
+                    </p>
+                    <p>
+                      The integration of NLI and text labeling was generally perceived as helpful for semantic interpretation and interaction (P3, P5, P6, P8, P9), supporting H3. Participants noted that NLI enabled intuitive querying and understanding of unfamiliar datasets. For instance, P3 highlighted that "I found NLI useful for obtaining explanations, as the system could provide explanations for specific regions or for the volume as a whole." P6 reported that speech-based interaction was particularly useful when the text in the NLI panel was less readable. At the same time, participants noted that latency in text labeling and LLM responses should be reduced.
+                    </p>
+                    <p>
+                      Several usability-related limitations and improvement suggestions were also raised. Participants requested clearer visual feedback for brush interaction, such as indicating the brush tip or providing a preview (P5), and emphasized the need for undo functionality (P7). Others suggested improving controller-based interaction, including more intuitive button mappings and shortcut-based operations (P2, P8). For example, P2 suggested that brush activation should be toggleable via controller input with clear visual feedback, while P8 noted that mapping panel button inputs such as the mic button to controllers could improve efficiency and bring VR interaction closer to the speed of traditional mouse-and-keyboard workflows.
+                    </p>
+                    <p>
+                      Finally, participants highlighted that the proposed framework is particularly well-suited for complex, unfamiliar, or spatially overlapping datasets (P4, P5, P6, P7, P8, P10, P11). As P4 noted, "for unfamiliar and complex cases, it becomes easier to quickly understand and select the desired volume," especially in datasets such as vascular structures or cosmological data. P8 further emphasized its applicability to medical datasets, noting that it can support fine-grained segmentation tasks such as distinguishing cancer and non-cancer regions within the same organ. Participants also suggested potential applications in other domains, including interior or structured scene datasets (P11). Overall, the post-interview results reinforce the quantitative findings and support all four hypotheses.
                     </p>
                   </div>
+
+                  <div class="two-figures">
+                    <figure class="paper-figure white-figure">
+                      <img src="static/images/figures/appendix-table-4.png" alt="Appendix Table 4 per-participant vortex results">
+                      <figcaption>Table 4. Per-participant user study results for the vortex dataset.</figcaption>
+                    </figure>
+                    <figure class="paper-figure white-figure">
+                      <img src="static/images/figures/appendix-table-5.png" alt="Appendix Table 5 per-participant lobster results">
+                      <figcaption>Table 5. Per-participant user study results for the lobster dataset.</figcaption>
+                    </figure>
+                  </div>
+
+                  <figure class="paper-figure white-figure">
+                    <img src="static/images/figures/appendix-table-6.png" alt="Appendix Table 6 per-participant ionization results">
+                    <figcaption>Table 6. Per-participant user study results for the ionization dataset.</figcaption>
+                  </figure>
                 </div>
               </details>
-            </div>
-
-            <div class="paper-subsection">
-              <h3>Rendering Efficiency</h3>
-              <div class="paper-body">
-                <p>
-                  The paper reports average rendering performance close to 120 FPS across all evaluated datasets, well above the 90 FPS threshold commonly used for VR comfort. This is presented as evidence that Gaussian-splatting-based volume visualization can preserve immersive interaction even for very large volumes.
-                </p>
-                <p>
-                  Examples include 12.6 MB of splats for the 4 GB Nyx dataset and 25.8 MB of splats for the 4.22 GB chameleon dataset. The authors use these results to argue that the representation remains compact while still supporting real-time editable rendering.
-                </p>
-              </div>
             </div>
           </div>
         </details>
