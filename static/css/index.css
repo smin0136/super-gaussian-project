@@ -11,7 +11,6 @@
   --line: rgba(13, 42, 69, 0.12);
   --shadow: 0 18px 45px rgba(7, 26, 42, 0.12);
   --radius: 18px;
-  --radius-sm: 12px;
   --transition: 180ms ease;
 }
 
@@ -35,6 +34,10 @@ a {
 
 a:hover {
   color: var(--sky-500);
+}
+
+img {
+  max-width: 100%;
 }
 
 .project-hero {
@@ -86,7 +89,7 @@ a:hover {
   max-width: 840px;
   margin: 0 auto 1.5rem;
   font-size: clamp(1.15rem, 2.2vw, 1.4rem);
-  color: rgba(244, 249, 252, 0.9);
+  color: rgba(244, 249, 252, 0.92);
 }
 
 .hero-tags {
@@ -107,17 +110,8 @@ a:hover {
   font-weight: 700;
 }
 
-.authors-note,
-.resource-note {
+.authors-note {
   color: rgba(239, 247, 251, 0.82);
-}
-
-.resource-note {
-  margin-top: 1rem;
-}
-
-.resource-note a {
-  color: #d8eff8;
 }
 
 .publication-links {
@@ -152,13 +146,6 @@ a:hover {
   background: linear-gradient(135deg, #8cd4e2, #d9f0f6);
 }
 
-.button.is-disabled {
-  background: rgba(255, 255, 255, 0.16);
-  color: rgba(255, 255, 255, 0.8);
-  box-shadow: none;
-  cursor: not-allowed;
-}
-
 .section {
   padding: 4.5rem 1.5rem;
 }
@@ -189,12 +176,23 @@ a:hover {
   margin-top: -1rem;
 }
 
+.video-frame,
+.figure-frame,
+.feature-card,
+.case-card,
+.study-card,
+.study-summary-card,
+.table-card,
+.details-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow);
+}
+
 .video-frame {
   overflow: hidden;
-  border: 1px solid rgba(13, 42, 69, 0.12);
-  border-radius: 26px;
   background: #02101b;
-  box-shadow: var(--shadow);
 }
 
 .video-frame video {
@@ -203,18 +201,39 @@ a:hover {
   height: auto;
 }
 
+.figure-frame {
+  overflow: hidden;
+  margin: 0;
+}
+
+.figure-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.figure-frame figcaption {
+  padding: 1rem 1.15rem 1.1rem;
+  color: #465a6b;
+  font-size: 0.95rem;
+}
+
 .abstract-copy,
+.feature-card p,
+.case-card p,
 .study-card p,
 .study-summary-card p,
-.feature-card p,
+.details-body p,
 .study-card li,
 .study-summary-card li {
   color: #243646;
 }
 
 .feature-grid,
+.case-grid,
 .study-grid,
-.study-intro {
+.study-intro,
+.figure-grid {
   display: grid;
   gap: 1.25rem;
 }
@@ -223,28 +242,34 @@ a:hover {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.case-grid {
+  margin-top: 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .study-intro,
 .study-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.feature-card,
-.study-card,
-.study-summary-card,
-.table-card {
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: var(--shadow);
+.figure-grid {
+  margin-top: 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.triple-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .feature-card,
+.case-card,
 .study-card,
 .study-summary-card {
   padding: 1.4rem 1.45rem;
 }
 
 .feature-card h3,
+.case-card h3,
 .study-card h3,
 .study-summary-card h3,
 .table-header h3 {
@@ -305,8 +330,8 @@ a:hover {
 
 .results-table {
   width: 100%;
-  border-collapse: collapse;
   min-width: 880px;
+  border-collapse: collapse;
   background: #fff;
 }
 
@@ -336,8 +361,47 @@ a:hover {
   font-weight: 700;
 }
 
-.bottom-grid {
+.details-stack {
+  display: grid;
+  gap: 1rem;
   margin-top: 1.25rem;
+}
+
+.details-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.details-card summary {
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+  font-weight: 800;
+  color: var(--ink-900);
+  list-style: none;
+}
+
+.details-card summary::-webkit-details-marker {
+  display: none;
+}
+
+.details-card summary::after {
+  content: "+";
+  float: right;
+  color: var(--ink-700);
+  font-size: 1.15rem;
+}
+
+.details-card[open] summary::after {
+  content: "−";
+}
+
+.details-card[open] summary {
+  border-bottom: 1px solid rgba(13, 42, 69, 0.08);
+  background: rgba(159, 212, 223, 0.08);
+}
+
+.details-body {
+  padding: 1rem 1.2rem 1.2rem;
 }
 
 .project-footer {
@@ -378,13 +442,18 @@ a:hover {
   background: var(--ink-700);
 }
 
-@media screen and (max-width: 960px) {
-  .feature-grid {
+@media screen and (max-width: 1080px) {
+  .triple-grid {
     grid-template-columns: 1fr;
   }
+}
 
+@media screen and (max-width: 960px) {
+  .feature-grid,
+  .case-grid,
   .study-intro,
-  .study-grid {
+  .study-grid,
+  .figure-grid {
     grid-template-columns: 1fr;
   }
 }
