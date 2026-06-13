@@ -260,16 +260,26 @@ img {
 
 .paper-details {
   margin-top: 1.35rem;
-  border-top: 1px solid var(--line-strong);
-  border-bottom: 1px solid var(--line);
-  background: transparent;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
 }
 
 .paper-details summary {
-  padding: 0.95rem 0;
+  padding: 0.95rem 1.1rem;
   cursor: pointer;
   list-style: none;
   font-weight: 800;
+  color: #253244;
+  background: #fafbfd;
+  transition: background 160ms ease, color 160ms ease, box-shadow 160ms ease;
+}
+
+.paper-details summary:hover {
+  background: #f1f4f7;
+  color: #111111;
+  box-shadow: inset 0 0 0 1px rgba(37, 50, 68, 0.04);
 }
 
 .paper-details summary::-webkit-details-marker {
@@ -280,14 +290,21 @@ img {
   content: "+";
   float: right;
   color: var(--muted);
+  transition: color 160ms ease, transform 160ms ease;
 }
 
 .paper-details[open] summary::after {
   content: "-";
+  color: var(--text);
+}
+
+.paper-details[open] summary {
+  background: #eef2f6;
+  color: #111111;
 }
 
 .detail-block {
-  padding: 0.25rem 0 0.75rem;
+  padding: 0.25rem 1.1rem 0.9rem;
 }
 
 .nested-details {
