@@ -308,7 +308,12 @@
           <article class="study-summary-card">
             <h3>Study 2: Interactive Selection</h3>
             <p>Selection comparison against SuperSplat and GSVR on vortex, lobster, and ionization.</p>
-            <p>Metrics include ACC, MCC, F1, IoU, precision, interaction count, completion time, and NASA-TLX workload.</p>
+            <p>Metrics include NASA-TLX workload.</p>
+            <!-- RESTORE_SELECTION_PERFORMANCE: Metrics include ACC, MCC, F1, IoU, precision, interaction count, completion time, and NASA-TLX workload. -->
+          </article>
+          <article class="study-summary-card">
+            <h3>Post-Interview Summary</h3>
+            <p>Qualitative feedback on workflow, interaction design, VR exploration, NLI, and usability improvements.</p>
           </article>
         </div>
 
@@ -317,7 +322,8 @@
           <div class="detail-block">
             <div class="paper-body">
               <p>
-                We conducted two separate user studies to evaluate both the performance of our selection method and the usability of our overall framework. In Study 1, participants explored various volumetric datasets using our framework. They experienced VR-based interaction, including controller-based volume editing, NLI, text labeling, and selection-driven NLI queries. We then evaluated the system's usability. In Study 2, we focused on the effectiveness of the selection method by comparing it with existing Gaussian-based selection techniques. We measured participants' selection accuracy, interaction count, completion time, and mental workload. After both studies, we additionally conducted post-interviews to gather qualitative feedback.
+                We conducted two separate user studies to evaluate both the performance of our selection method and the usability of our overall framework. In Study 1, participants explored various volumetric datasets using our framework. They experienced VR-based interaction, including controller-based volume editing, NLI, text labeling, and selection-driven NLI queries. We then evaluated the system's usability. In Study 2, we focused on the effectiveness of the selection method by comparing it with existing Gaussian-based selection techniques. We measured participants' mental workload. After both studies, we additionally conducted post-interviews to gather qualitative feedback.
+                <!-- RESTORE_SELECTION_PERFORMANCE: We measured participants' selection accuracy, interaction count, completion time, and mental workload. -->
               </p>
             </div>
 
@@ -393,7 +399,8 @@
               <div class="paper-body">
                 <h4>Datasets</h4>
                 <p>
-                  To evaluate selection accuracy, interaction count, completion time, and user workload, we selected three datasets. The vortex dataset features a transparent outer structure surrounding a dense inner core, the lobster dataset includes surface-connected regions with thin leg structures, and the ionization dataset contains a large, sparse target region with empty spaces.
+                  To evaluate user workload, we selected three datasets. The vortex dataset features a transparent outer structure surrounding a dense inner core, the lobster dataset includes surface-connected regions with thin leg structures, and the ionization dataset contains a large, sparse target region with empty spaces.
+                  <!-- RESTORE_SELECTION_PERFORMANCE: To evaluate selection accuracy, interaction count, completion time, and user workload, we selected three datasets. -->
                 </p>
                 <h4>Task and Procedure</h4>
                 <p>
@@ -407,18 +414,21 @@
                 </p>
                 <h4>Metrics</h4>
                 <p>
-                  To assess selection performance, we report ACC, MCC, F1, IoU, and precision. MCC is especially important because the target region occupies only a small portion of the data, making class imbalance a concern. To evaluate user effort, we measured interaction count and completion time, and to evaluate workload and fatigue, participants completed NASA-TLX and post-questionnaires after the trials.
+                  To assess workload and fatigue, participants completed NASA-TLX and post-questionnaires after the trials.
+                  <!-- RESTORE_SELECTION_PERFORMANCE: To assess selection performance, we report ACC, MCC, F1, IoU, and precision. MCC is especially important because the target region occupies only a small portion of the data, making class imbalance a concern. To evaluate user effort, we measured interaction count and completion time, and to evaluate workload and fatigue, participants completed NASA-TLX and post-questionnaires after the trials. -->
                 </p>
                 <h4>Results</h4>
                 <p>
                   The results show that Super-Gaussian consistently outperforms baseline methods in both user experience and task performance. The NASA-TLX evaluation indicates that Super-Gaussian significantly reduces user workload, with substantially lower mental demand, temporal demand, effort, and frustration, while also achieving the highest perceived performance score.
                 </p>
+                <!-- RESTORE_SELECTION_PERFORMANCE:
                 <p>
                   Table 1 demonstrates that Super-Gaussian achieves the highest overall accuracy across datasets, though performance varies depending on dataset characteristics. For datasets with clearly defined boundaries such as vortex and ionization, SuperSplat and GSVR can sometimes achieve comparable or slightly higher accuracy in specific conditions. In contrast, for more complex datasets such as lobster, VR-based methods outperform 2D approaches, highlighting their advantage in selecting thin structures and handling subtle spatial boundaries.
                 </p>
                 <p>
                   The efficiency metrics further show that Super-Gaussian consistently requires fewer interactions and shorter completion times across all datasets, with especially large improvements in vortex and ionization. Additionally, the average brush-points-per-stroke measurement shows that interaction duration can differ substantially even when interaction counts appear similar, indicating that fatigue is more strongly influenced by sustained interaction than by count alone. These findings support H1 and H2.
                 </p>
+                -->
               </div>
 
               <figure class="paper-figure white-figure">
@@ -428,6 +438,7 @@
                 </figcaption>
               </figure>
 
+              <!-- RESTORE_SELECTION_PERFORMANCE:
               <div class="paper-table">
                 <table>
                   <thead>
@@ -473,6 +484,7 @@
                   </tbody>
                 </table>
               </div>
+              -->
 
               <figure class="paper-figure white-figure">
                 <img src="static/images/figures/nasa-tlx.png" alt="NASA-TLX results">
