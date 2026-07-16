@@ -5,6 +5,10 @@ function scrollToTop() {
   });
 }
 
+function showCodeReleaseNotice() {
+  window.alert('The code repository, including implementation details, will be made public after acceptance.');
+}
+
 window.addEventListener('scroll', function () {
   const scrollButton = document.querySelector('.scroll-to-top');
   if (!scrollButton) {
